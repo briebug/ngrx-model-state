@@ -1,21 +1,23 @@
-<div *ngFor="let post of posts">
-  <h2>Post</h2>
-  <h2>{{post.title}}</h2>
-  <h4>{{post.description}}</h4>
-
-  <div *ngFor="let comment of post.comments">
-    <span>{{comment.comment}} - {{comment.author.name}}</span>
-  </div>
-</div>
-<div>
-  <h4>Add Comment</h4>
-  <form>
-      <div class="form-group">
-        <label for="newComment">New Comment</label>
-        <input id="newComment" name="newComment" class="form-control" [(ngModel)]="newComment">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" (click)="addComment()">Add Comment</button>
-      </div>
+<mat-card>
+  <mat-card-content *ngFor="let post of posts">
+    <h2>{{post.title}}</h2>
+    <h4>{{post.description}}</h4>
+    <mat-card>
+      <mat-card-content>
+        <div *ngFor="let comment of post.comments">
+          <span>{{comment.comment}} - {{comment.author.name}}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <form (ngSubmit)="addComment()">
+      <mat-input-container>
+        <input type="text" placeholder="new comment..." matInput name="newComment" [(ngModel)]="newComment">
+      </mat-input-container>
+      <button type="submit" mat-button>Add Comment</button>
     </form>
-</div>
+  </mat-card-content>
+</mat-card>
