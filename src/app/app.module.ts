@@ -2,7 +2,9 @@ import { BrowserModule } from '@angular/platform-browser';
 import { FormsModule } from '@angular/forms';
 import { NgModule } from '@angular/core';
 import { HttpModule } from '@angular/http';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 
+import { MatInputModule, MatCardModule, MatButtonModule } from '@angular/material';
 
 import { StoreModule } from '@ngrx/store';
 import { EffectsModule } from '@ngrx/effects';
@@ -30,6 +32,7 @@ import { PostComponent } from './posts/components/post/post.component';
     BrowserModule,
     FormsModule,
     HttpModule,
+    BrowserAnimationsModule,
 
     StoreModule.forRoot({
       posts: postReducer,
@@ -38,7 +41,10 @@ import { PostComponent } from './posts/components/post/post.component';
     EffectsModule.forRoot([PostEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
-    })
+    }),
+    MatCardModule,
+    MatButtonModule,
+    MatInputModule
   ],
   providers: [PostService],
   bootstrap: [AppComponent]

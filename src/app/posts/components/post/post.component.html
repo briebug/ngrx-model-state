@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 <div *ngFor="let post of posts">
   <h2>{{post.title}}</h2>
   <h4>{{post.description}}</h4>
@@ -18,3 +19,28 @@
     </div>
   </form>
 </div>
+=======
+<mat-card>
+  <mat-card-content *ngFor="let post of posts">
+    <h2>{{post.title}}</h2>
+    <h4>{{post.description}}</h4>
+    <mat-card>
+      <mat-card-content>
+        <div *ngFor="let comment of post.comments">
+          <span>{{comment.comment}} - {{comment.author.name}}</span>
+        </div>
+      </mat-card-content>
+    </mat-card>
+  </mat-card-content>
+</mat-card>
+<mat-card>
+  <mat-card-content>
+    <form (ngSubmit)="addComment()">
+      <mat-input-container>
+        <input type="text" placeholder="new comment..." matInput name="newComment" [(ngModel)]="newComment">
+      </mat-input-container>
+      <button type="submit" mat-button>Add Comment</button>
+    </form>
+  </mat-card-content>
+</mat-card>
+>>>>>>> master

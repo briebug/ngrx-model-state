@@ -29,5 +29,7 @@ export class PostComponent implements OnInit {
       comment: Comment = {id: this.id, comment: this.newComment, author: user};
 
     this.store.dispatch(new postActions.AddComment(this.posts[0].id, comment));
+
+    this.newComment = '';
   }
 }
