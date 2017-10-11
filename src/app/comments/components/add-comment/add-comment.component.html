@@ -1,0 +1,10 @@
+<mat-card>
+  <mat-card-content>
+    <form (ngSubmit)="addComment()">
+      <mat-input-container>
+        <input type="text" placeholder="new comment..." matInput name="newComment" [(ngModel)]="newComment">
+      </mat-input-container>
+      <button type="submit" mat-button>Add Comment</button>
+    </form>
+  </mat-card-content>
+</mat-card>
