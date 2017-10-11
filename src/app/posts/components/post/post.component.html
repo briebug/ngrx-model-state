@@ -2,11 +2,9 @@
   <mat-card-content *ngFor="let post of posts">
     <h2>{{post.title}}</h2>
     <h4>{{post.description}}</h4>
-    <mat-card>
+    <mat-card *ngFor="let comment of post.comments">
       <mat-card-content>
-        <div *ngFor="let comment of post.comments">
-          <span>{{comment.comment}} - {{comment.author.name}}</span>
-        </div>
+        <span>{{comment.comment}} - {{comment.author.name}}</span>
       </mat-card-content>
     </mat-card>
   </mat-card-content>
