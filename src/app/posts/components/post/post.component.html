@@ -1,21 +1,8 @@
-<mat-card>
-  <mat-card-content *ngFor="let post of posts">
+<mat-card *ngFor="let post of posts">
+  <mat-card-content>
     <h2>{{post.title}}</h2>
     <h4>{{post.description}}</h4>
-    <mat-card *ngFor="let comment of post.comments">
-      <mat-card-content>
-        <span>{{comment.comment}} - {{comment.author.name}}</span>
-      </mat-card-content>
-    </mat-card>
-  </mat-card-content>
-</mat-card>
-<mat-card>
-  <mat-card-content>
-    <form (ngSubmit)="addComment()">
-      <mat-input-container>
-        <input type="text" placeholder="new comment..." matInput name="newComment" [(ngModel)]="newComment">
-      </mat-input-container>
-      <button type="submit" mat-button>Add Comment</button>
-    </form>
+    <app-comments-list [comments]="post.comments"></app-comments-list>
+    <app-add-comment [postId]="post.id"></app-add-comment>
   </mat-card-content>
 </mat-card>

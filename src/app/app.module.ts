@@ -16,15 +16,19 @@ import { PostService } from './posts/services/post';
 
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/containers/posts.component';
-import { CommentsComponent } from './comments/comments.component';
 import { PostComponent } from './posts/components/post/post.component';
+import { CommentsListComponent } from './comments/components/comments-list/comments-list.component';
+import { CommentComponent } from './comments/components/comment/comment.component';
+import { AddCommentComponent } from './comments/components/add-comment/add-comment.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PostsComponent,
-    CommentsComponent,
-    PostComponent
+    PostComponent,
+    CommentsListComponent,
+    CommentComponent,
+    AddCommentComponent
   ],
   imports: [
     BrowserModule,
