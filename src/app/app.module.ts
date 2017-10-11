@@ -12,6 +12,8 @@ import { PostEffects } from './posts/effects/post';
 import { postReducer } from './posts/reducers/post';
 import { PostService } from './posts/services/post';
 
+import { commentReducer } from './comments/reducers/comment';
+
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/containers/posts.component';
 import { CommentsComponent } from './comments/comments.component';
@@ -30,7 +32,8 @@ import { PostComponent } from './posts/components/post/post.component';
     HttpModule,
 
     StoreModule.forRoot({
-      posts: postReducer
+      posts: postReducer,
+      comments: commentReducer
     }),
     EffectsModule.forRoot([PostEffects]),
     StoreDevtoolsModule.instrument({

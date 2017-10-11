@@ -1,3 +1,6 @@
+import { createSelector, createFeatureSelector } from '@ngrx/store';
+import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
+
 import { Post } from '../../posts/models/post';
 import { Comment } from '../models/comment';
 import * as commentActions from '../actions/comment';
@@ -8,7 +11,14 @@ export interface AppState {
   comments: Comment[]
 }
 
-export function commentReducer(state: Post[] = [], action: Action) {
+export interface State extends EntityState<Comment> { }
+export const adapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({
+  selectId: (comment: Comment) => comment.id,
+  sortComparer: false
+});
+export const initialState: State = adapter.getInitialState();
+
+export function commentReducer(state = initialState, action: Action) {
   switch (action.type) {
 
     case commentActions.SAVE_COMMENT:

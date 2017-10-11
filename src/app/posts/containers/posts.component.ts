@@ -4,7 +4,8 @@ import { Store } from '@ngrx/store';
 import { Observable } from 'rxjs/Observable';
 
 import { Post } from '../models/post';
-import { AppState } from '../reducers/post';
+import * as fromPosts from '../reducers/post';
+import * as postSelectors from '../reducers';
 import * as postActions from '../actions/post';
 
 @Component({
@@ -15,8 +16,8 @@ import * as postActions from '../actions/post';
 export class PostsComponent implements OnInit {
   posts$: Observable<Post[]>;
 
-  constructor(private store: Store<AppState>) {
-    this.posts$ = this.store.select('posts');
+  constructor(private store: Store<fromPosts.AppState>) {
+    this.posts$ = this.store.select(postSelectors.selectAllPosts);
   }
 
   ngOnInit() {

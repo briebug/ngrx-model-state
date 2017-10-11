@@ -1,5 +1,4 @@
 <div *ngFor="let post of posts">
-  <h2>Post</h2>
   <h2>{{post.title}}</h2>
   <h4>{{post.description}}</h4>
 
@@ -10,12 +9,12 @@
 <div>
   <h4>Add Comment</h4>
   <form>
-      <div class="form-group">
-        <label for="newComment">New Comment</label>
-        <input id="newComment" name="newComment" class="form-control" [(ngModel)]="newComment">
-      </div>
-      <div class="form-group">
-        <button class="btn btn-primary" (click)="addComment()">Add Comment</button>
-      </div>
-    </form>
+    <div class="form-group">
+      <label for="newComment">New Comment</label>
+      <input id="newComment" name="newComment" class="form-control" [(ngModel)]="newComment">
+    </div>
+    <div class="form-group">
+      <button class="btn btn-primary" (click)="addComment()">Add Comment</button>
+    </div>
+  </form>
 </div>
