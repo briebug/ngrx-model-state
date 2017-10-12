@@ -22,12 +22,15 @@ export function postReducer(state: Post[] = [], action: Action) {
       return [...state, ...action.payload];
 
     case postActions.ADD_COMMENT:
-      let posts = [...state],
-        post = posts.find(post => post.id === action.id);
+      return state.map((post) => {
+        if (post.id === action.id) {
+          post.comments = post.comments.map((comment) => {
+            return comment;
+          }).concat(action.payload);
+        }
 
-      post.comments = [...post.comments, action.payload];
-
-      return posts;
+        return post;
+      });
 
     default:
       return state;
