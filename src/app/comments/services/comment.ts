@@ -10,6 +10,12 @@ import { Comment } from '../models/comment';
 export class CommentService {
   constructor(private http: Http) { }
 
+  loadAll(): Observable<Comment[]> {
+    console.log('CommentService.loadAll');
+    return this.http.get('/api/comments')
+      .map(res => res.json());
+  }
+
   save(comment) {
     if (comment.id === 0) {
       return this.http.post('/api/comments', comment)

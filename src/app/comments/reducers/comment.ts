@@ -21,16 +21,29 @@ export const initialState: State = adapter.getInitialState();
 export function commentReducer(state = initialState, action: Action) {
   switch (action.type) {
 
+    case commentActions.ADD_COMMENT:
+      return {
+        ...adapter.addOne(action.payload, state)
+      };
+
+    case commentActions.LOAD_COMMENTS_SUCCESS:
+      return {
+        ...adapter.addMany(action.payload, state)
+      };
+
+    case commentActions.LOAD_COMMENTS_FAIL:
+      return {
+        ...state,
+        ...action.payload
+      };
+
     case commentActions.SAVE_COMMENT:
       return { ...state, ...action.payload };
-
-    case commentActions.SAVE_COMMENT_SUCCESS:
-      return { ...state };
 
     case commentActions.SAVE_COMMENT_FAIL:
       return { ...state, ...action.payload };
 
     default:
-      return state;
+      return { ...state };
   }
 }

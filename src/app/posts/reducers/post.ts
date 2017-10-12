@@ -40,14 +40,6 @@ export function postReducer(state = initialState, action: Action) {
         ...action.payload
       };
 
-    // case postActions.ADD_COMMENT:
-    //   let posts = [...state],
-    //     post = posts.find(post => post.id === action.id);
-
-    //   post.comments = [...post.comments, action.payload];
-
-    //   return posts;
-
     default:
       return state;
   }

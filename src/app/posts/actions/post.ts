@@ -3,6 +3,7 @@ import { Action } from '@ngrx/store';
 import { Post } from '../models/post';
 import { Comment } from '../../comments/models/comment';
 
+export const LOAD_POSTS_COMMENTS ='[Post] Load posts and comments';
 export const LOAD_POSTS = '[Post] Load posts';
 export const LOAD_POSTS_SUCCESS = '[Post] Load posts success';
 export const LOAD_POSTS_FAIL = '[Post] Load posts fail';
@@ -12,6 +13,12 @@ export const SAVE_POST_SUCCESS = '[Post] Save post success';
 export const SAVE_POST_FAIL = '[Post] Save post fail';
 
 export const ADD_COMMENT = '[Post] Add comment';
+
+export class LoadPostsComments implements Action {
+  readonly type = LOAD_POSTS_COMMENTS;
+
+  constructor() { }
+}
 
 export class LoadPosts implements Action {
   readonly type = LOAD_POSTS;
@@ -49,17 +56,10 @@ export class SavePostsFail implements Action {
   constructor(public payload?: any) { }
 }
 
-export class AddComment implements Action {
-  readonly type = ADD_COMMENT;
-
-  constructor(public id: number, public payload: Comment) { }
-}
-
 export type All
   = LoadPosts
   | LoadPostsSuccess
   | LoadPostsFail
   | SavePosts
   | SavePostsSuccess
-  | SavePostsFail
-  | AddComment;
+  | SavePostsFail;

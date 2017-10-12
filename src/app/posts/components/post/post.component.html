@@ -2,7 +2,7 @@
   <mat-card-content>
     <h2>{{post.title}}</h2>
     <h4>{{post.description}}</h4>
-    <app-comments-list [comments]="post.comments"></app-comments-list>
+    <app-comments-list [comments]="comments$ | async"></app-comments-list>
     <app-add-comment [postId]="post.id"></app-add-comment>
   </mat-card-content>
 </mat-card>

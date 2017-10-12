@@ -10,6 +10,7 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/delay';
 
 import * as postActions from '../actions/post';
+import * as commentActions from '../../comments/actions/comment';
 import { Post } from '../models/post';
 import { PostService } from '../services/post';
 
@@ -20,6 +21,13 @@ export class PostEffects {
   constructor(private actions: Actions,
     private postSvc: PostService) {
   }
+
+  // Splitter action to load posts and comments
+  @Effect() loadPosts = this.actions.ofType(postActions.LOAD_POSTS_COMMENTS)
+    .flatMap(add => [
+      new postActions.LoadPosts(),
+      new commentActions.LoadComments()
+    ]);
 
   @Effect()
   loadAllPosts: Observable<Action> = this.actions.ofType(postActions.LOAD_POSTS)

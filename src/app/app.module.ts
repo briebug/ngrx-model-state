@@ -14,7 +14,10 @@ import { PostEffects } from './posts/effects/post';
 import { postReducer } from './posts/reducers/post';
 import { PostService } from './posts/services/post';
 
+
+import { CommentEffects } from './comments/effects/comment';
 import { commentReducer } from './comments/reducers/comment';
+import { CommentService } from './comments/services/comment';
 
 import { AppComponent } from './app.component';
 import { PostsComponent } from './posts/containers/posts.component';
@@ -42,7 +45,7 @@ import { AddCommentComponent } from './comments/components/add-comment/add-comme
       posts: postReducer,
       comments: commentReducer
     }),
-    EffectsModule.forRoot([PostEffects]),
+    EffectsModule.forRoot([PostEffects, CommentEffects]),
     StoreDevtoolsModule.instrument({
       maxAge: 10
     }),
@@ -50,7 +53,7 @@ import { AddCommentComponent } from './comments/components/add-comment/add-comme
     MatButtonModule,
     MatInputModule
   ],
-  providers: [PostService],
+  providers: [PostService, CommentService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

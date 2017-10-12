@@ -4,8 +4,8 @@ import { Store } from '@ngrx/store';
 
 import { Post, User } from '../../../posts/models/post';
 import { AppState } from '../../../posts/reducers/post';
-import * as postActions from '../../../posts/actions/post';
-import { Comment } from '../../../comments/models/comment';
+import * as commentActions from '../../actions/comment';
+import { Comment } from '../..//models/comment';
 
 @Component({
   selector: 'app-add-comment',
@@ -26,10 +26,10 @@ export class AddCommentComponent implements OnInit {
   addComment() {
     this.id++;
 
-    let user: User = { id: 1, name: 'Jesse Sanders' },
-      comment: Comment = { id: this.id, comment: this.newComment, author: user };
+    let user: User = { id: 1, name: 'Joe User' },
+      comment: Comment = { id: this.id, postId: this.postId, comment: this.newComment, author: user };
 
-    this.store.dispatch(new postActions.AddComment(this.postId, comment));
+    this.store.dispatch(new commentActions.AddComment(this.postId, comment));
 
     this.newComment = '';
   }

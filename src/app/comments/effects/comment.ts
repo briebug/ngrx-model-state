@@ -16,13 +16,19 @@ import { CommentService } from '../services/comment';
 export type Action = commentActions.All;
 
 @Injectable()
-export class PostEffects {
+export class CommentEffects {
   constructor(private actions: Actions,
     private commentSvc: CommentService) {
   }
 
   @Effect()
-  savePost: Observable<Action> = this.actions.ofType(commentActions.SAVE_COMMENT)
+  loadAll: Observable<Action> = this.actions.ofType(commentActions.LOAD_COMMENTS)
+    .switchMap(() => this.commentSvc.loadAll())
+    .map(comments => { return new commentActions.LoadCommentsSuccess(comments) })
+    .catch(err => of(new commentActions.LoadCommentsFail({ error: err.message })));
+
+  @Effect()
+  saveComment: Observable<Action> = this.actions.ofType(commentActions.SAVE_COMMENT)
     .map((action: commentActions.SaveComments) => action.payload)
     .switchMap((comment: Comment) => this.commentSvc.save(comment))
     .map((comment: Comment) => { return new commentActions.SaveCommentsSuccess(comment)})

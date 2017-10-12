@@ -21,6 +21,6 @@ export class PostsComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.store.dispatch(new postActions.LoadPosts());
+    this.store.dispatch(new postActions.LoadPostsComments());
   }
 }
