@@ -8,14 +8,16 @@ import * as commentActions from '../actions/comment';
 export type Action = commentActions.All;
 
 export interface AppState {
-  comments: Comment[]
+  comments: Comment[];
 }
 
-export interface State extends EntityState<Comment> { }
+export interface State extends EntityState<Comment> {}
+
 export const adapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({
   selectId: (comment: Comment) => comment.id,
   sortComparer: false
 });
+
 export const initialState: State = adapter.getInitialState();
 
 export function commentReducer(state = initialState, action: Action) {

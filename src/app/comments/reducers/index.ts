@@ -1,15 +1,17 @@
 import { createSelector, createFeatureSelector, ActionReducerMap } from '@ngrx/store';
-import * as fromComment from './comment';
+import * as fromComments from './comment';
+import * as fromPosts from '../../posts/reducers/post';
+import * as postSelectors from '../../posts/reducers';
 
 export interface State {
-  posts: fromComment.State;
+  posts: fromComments.State;
 }
 
 export const reducers: ActionReducerMap<State> = {
-  posts: fromComment.commentReducer
+  posts: fromComments.commentReducer
 };
 
-export const selectCommentState = createFeatureSelector<fromComment.State>('comments');
+export const selectCommentState = createFeatureSelector<fromComments.State>('comments');
 
 export const {
   // select the array of comment ids
@@ -23,11 +25,12 @@ export const {
 
   // select the total count
   selectTotal: selectCommentTotal
-} = fromComment.adapter.getSelectors(selectCommentState);
+} = fromComments.adapter.getSelectors(selectCommentState);
 
 export const selectByPostId = createSelector(
   selectAllComments,
-  (comments) => {
-    return comments.filter(comment => comment.postId === 1)
+  postSelectors.getSelectedPostId,
+  (comments, postId) => {
+    return comments.filter(comment => comment.postId === postId);
   }
 );

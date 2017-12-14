@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Action } from '@ngrx/store';
 import { Effect, Actions } from '@ngrx/effects';
 
 import { Observable } from 'rxjs/Observable';
@@ -9,12 +10,14 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/delay';
 
-import * as postActions from '../actions/post';
+import { PostActionTypes,
+  LoadPosts, LoadPostsSuccess, LoadPostsFail,
+  SavePosts, SavePostsSuccess, SavePostsFail } from '../actions/post';
+import * as postActions from'../actions/post';
+
 import * as commentActions from '../../comments/actions/comment';
 import { Post } from '../models/post';
 import { PostService } from '../services/post';
-
-export type Action = postActions.All;
 
 @Injectable()
 export class PostEffects {
@@ -23,22 +26,22 @@ export class PostEffects {
   }
 
   // Splitter action to load posts and comments
-  @Effect() loadPosts = this.actions.ofType(postActions.LOAD_POSTS_COMMENTS)
+  @Effect() loadPosts = this.actions.ofType(PostActionTypes.LoadPostsComments)
     .flatMap(add => [
       new postActions.LoadPosts(),
       new commentActions.LoadComments()
     ]);
 
   @Effect()
-  loadAllPosts: Observable<Action> = this.actions.ofType(postActions.LOAD_POSTS)
+  loadAllPosts: Observable<Action> = this.actions.ofType(PostActionTypes.Load)
     .switchMap(() => this.postSvc.loadAll())
-    .map(posts => { return new postActions.LoadPostsSuccess(posts) })
+    .map(posts => new postActions.LoadPostsSuccess(posts))
     .catch(err => of(new postActions.LoadPostsFail({ error: err.message })));
 
   @Effect()
-  savePost: Observable<Action> = this.actions.ofType(postActions.SAVE_POST)
+  savePost: Observable<Action> = this.actions.ofType(PostActionTypes.Save)
     .map((action: postActions.SavePosts) => action.payload)
     .switchMap((post: Post) => this.postSvc.save(post))
-    .map(posts => { return new postActions.SavePostsSuccess(posts) })
+    .map(posts => new postActions.SavePostsSuccess(posts))
     .catch(err => of(new postActions.SavePostsFail({ error: err.message })));
 }

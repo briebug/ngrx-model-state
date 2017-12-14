@@ -24,13 +24,13 @@ export class CommentEffects {
   @Effect()
   loadAll: Observable<Action> = this.actions.ofType(commentActions.LOAD_COMMENTS)
     .switchMap(() => this.commentSvc.loadAll())
-    .map(comments => { return new commentActions.LoadCommentsSuccess(comments) })
+    .map(comments => new commentActions.LoadCommentsSuccess(comments))
     .catch(err => of(new commentActions.LoadCommentsFail({ error: err.message })));
 
   @Effect()
   saveComment: Observable<Action> = this.actions.ofType(commentActions.SAVE_COMMENT)
     .map((action: commentActions.SaveComments) => action.payload)
     .switchMap((comment: Comment) => this.commentSvc.save(comment))
-    .map((comment: Comment) => { return new commentActions.SaveCommentsSuccess(comment)})
+    .map((comment: Comment) => new commentActions.SaveCommentsSuccess(comment))
     .catch(err => of(new commentActions.SaveCommentsFail({ error: err.message })));
 }

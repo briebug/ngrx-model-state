@@ -16,7 +16,7 @@ export class AddCommentComponent implements OnInit {
   @Input() postId: number;
 
   newComment: string;
-  id: number = 1;
+  id = 1;
 
   constructor(private store: Store<AppState>) { }
 
@@ -26,7 +26,7 @@ export class AddCommentComponent implements OnInit {
   addComment() {
     this.id++;
 
-    let user: User = { id: 1, name: 'Joe User' },
+    const user: User = { id: 1, name: 'Joe User' },
       comment: Comment = { id: this.id, postId: this.postId, comment: this.newComment, author: user };
 
     this.store.dispatch(new commentActions.AddComment(this.postId, comment));

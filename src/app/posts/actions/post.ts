@@ -1,65 +1,69 @@
 import { Action } from '@ngrx/store';
 
 import { Post } from '../models/post';
-import { Comment } from '../../comments/models/comment';
 
-export const LOAD_POSTS_COMMENTS ='[Post] Load posts and comments';
-export const LOAD_POSTS = '[Post] Load posts';
-export const LOAD_POSTS_SUCCESS = '[Post] Load posts success';
-export const LOAD_POSTS_FAIL = '[Post] Load posts fail';
-
-export const SAVE_POST = '[Post] Save post';
-export const SAVE_POST_SUCCESS = '[Post] Save post success';
-export const SAVE_POST_FAIL = '[Post] Save post fail';
-
-export const ADD_COMMENT = '[Post] Add comment';
+export enum PostActionTypes {
+  LoadPostsComments = '[Post] Load Posts and Comments',
+  Load = '[Post] Load',
+  LoadSuccess = '[Post] Load Success',
+  LoadFail = '[Post] Load Fail',
+  Save = '[Post] Save',
+  SaveSuccess = '[Post] Save Success',
+  SaveFail = '[Post] Save Fail',
+  Select = '[Post] Select'
+}
 
 export class LoadPostsComments implements Action {
-  readonly type = LOAD_POSTS_COMMENTS;
+  readonly type = PostActionTypes.LoadPostsComments;
 
   constructor() { }
 }
 
 export class LoadPosts implements Action {
-  readonly type = LOAD_POSTS;
-
-  constructor() { }
+  readonly type = PostActionTypes.Load;
 }
 
 export class LoadPostsSuccess implements Action {
-  readonly type = LOAD_POSTS_SUCCESS;
+  readonly type = PostActionTypes.LoadSuccess;
 
   constructor(public payload: Post[]) { }
 }
 
 export class LoadPostsFail implements Action {
-  readonly type = LOAD_POSTS_FAIL;
+  readonly type = PostActionTypes.LoadFail;
 
   constructor(public payload?: any) { }
 }
 
 export class SavePosts implements Action {
-  readonly type = SAVE_POST;
+  readonly type = PostActionTypes.Save;
 
   constructor(public payload: Post) { }
 }
 
 export class SavePostsSuccess implements Action {
-  readonly type = SAVE_POST_SUCCESS;
+  readonly type = PostActionTypes.SaveSuccess;
 
   constructor(public payload: Post) { }
 }
 
 export class SavePostsFail implements Action {
-  readonly type = SAVE_POST_FAIL;
+  readonly type = PostActionTypes.SaveFail;
 
   constructor(public payload?: any) { }
 }
 
-export type All
+export class Select implements Action {
+  readonly type = PostActionTypes.Select;
+
+  constructor(public payload: number) { }
+}
+
+export type PostActions
   = LoadPosts
   | LoadPostsSuccess
   | LoadPostsFail
   | SavePosts
   | SavePostsSuccess
-  | SavePostsFail;
+  | SavePostsFail
+  | Select;
