@@ -2,58 +2,57 @@ import { Action } from '@ngrx/store';
 
 import { Comment } from '../models/comment';
 
-export const ADD_COMMENT = '[Comment] Add comment';
-export const LOAD_COMMENTS = '[Comment] Load comments';
-export const LOAD_COMMENTS_SUCCESS = '[Comment] Load comments success';
-export const LOAD_COMMENTS_FAIL = '[Comment]Load comments fail';
-export const SAVE_COMMENT = '[Comment] Save comment';
-export const SAVE_COMMENT_SUCCESS = '[Comment] Save comment success';
-export const SAVE_COMMENT_FAIL = '[Comment] Save comment fail';
-
+export enum CommentActionTypes {
+  Add = '[Comment] Add',
+  Load = '[Comment] Load',
+  LoadSuccess = '[Comment] Load Success',
+  LoadFail = '[Comment] Load Fail',
+  Save = '[Comment] Save',
+  SaveSuccess = '[Comment] Save Success',
+  SaveFail = '[Comment] Save Fail',
+}
 
 export class AddComment implements Action {
-  readonly type = ADD_COMMENT;
+  readonly type = CommentActionTypes.Add;
 
   constructor(public postId: number, public payload: Comment) { }
 }
 
 export class LoadComments implements Action {
-  readonly type = LOAD_COMMENTS;
-
-  constructor() { }
+  readonly type = CommentActionTypes.Load;
 }
 
 export class LoadCommentsSuccess implements Action {
-  readonly type = LOAD_COMMENTS_SUCCESS;
+  readonly type = CommentActionTypes.LoadSuccess;
 
   constructor(public payload: Comment[]) { }
 }
 
 export class LoadCommentsFail implements Action {
-  readonly type = LOAD_COMMENTS_FAIL;
+  readonly type = CommentActionTypes.LoadFail;
 
   constructor(public payload?: any) { }
 }
 
 export class SaveComments implements Action {
-  readonly type = SAVE_COMMENT;
+  readonly type = CommentActionTypes.Save;
 
   constructor(public payload: Comment) { }
 }
 
 export class SaveCommentsSuccess implements Action {
-  readonly type = SAVE_COMMENT_SUCCESS;
+  readonly type = CommentActionTypes.SaveSuccess;
 
   constructor(public payload: Comment) { }
 }
 
 export class SaveCommentsFail implements Action {
-  readonly type = SAVE_COMMENT_FAIL;
+  readonly type = CommentActionTypes.SaveFail;
 
   constructor(public payload?: any) { }
 }
 
-export type All
+export type CommentActions
   = AddComment
   | LoadComments
   | LoadCommentsSuccess

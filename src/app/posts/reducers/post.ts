@@ -4,9 +4,6 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 import { Post, User } from '../models/post';
 import { PostActions, PostActionTypes } from '../actions/post';
 
-import { Observable } from 'rxjs/Observable';
-import 'rxjs/add/observable/of';
-
 export interface AppState {
   posts: Post[];
   comments: Comment[];
@@ -23,10 +20,7 @@ export const postAdapter: EntityAdapter<Post> = createEntityAdapter<Post>({
 });
 
 export const initialState: PostsState = postAdapter.getInitialState({
-  // hard coded to the first and only post in the array
-  // since we don't have a post page, there is no way to select a post,
-  // so we are just hard coding to the first post to simulate
-  selectedPostId: 1
+  selectedPostId: null
 });
 
 export function postReducer(

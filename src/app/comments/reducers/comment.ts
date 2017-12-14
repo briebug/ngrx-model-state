@@ -3,47 +3,53 @@ import { EntityState, EntityAdapter, createEntityAdapter } from '@ngrx/entity';
 
 import { Post } from '../../posts/models/post';
 import { Comment } from '../models/comment';
-import * as commentActions from '../actions/comment';
-
-export type Action = commentActions.All;
+import { CommentActions, CommentActionTypes } from '../actions/comment';
 
 export interface AppState {
   comments: Comment[];
 }
 
-export interface State extends EntityState<Comment> {}
+export interface CommentsState extends EntityState<Comment> { }
 
-export const adapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({
+export const commentAdapter: EntityAdapter<Comment> = createEntityAdapter<Comment>({
   selectId: (comment: Comment) => comment.id,
   sortComparer: false
 });
 
-export const initialState: State = adapter.getInitialState();
+export const initialState: CommentsState = commentAdapter.getInitialState();
 
-export function commentReducer(state = initialState, action: Action) {
+export function commentReducer(
+  state = initialState,
+  action: CommentActions
+): CommentsState {
   switch (action.type) {
 
-    case commentActions.ADD_COMMENT:
+    case CommentActionTypes.Add:
       return {
-        ...adapter.addOne(action.payload, state)
+        ...commentAdapter.addOne(action.payload, state)
       };
 
-    case commentActions.LOAD_COMMENTS_SUCCESS:
+    case CommentActionTypes.LoadSuccess:
       return {
-        ...adapter.addMany(action.payload, state)
+        ...commentAdapter.addMany(action.payload, state)
       };
 
-    case commentActions.LOAD_COMMENTS_FAIL:
+    case CommentActionTypes.LoadFail:
       return {
         ...state,
         ...action.payload
       };
 
-    case commentActions.SAVE_COMMENT:
-      return { ...state, ...action.payload };
+    case CommentActionTypes.SaveSuccess:
+      return {
+        ...commentAdapter.addOne(action.payload, state)
+      };
 
-    case commentActions.SAVE_COMMENT_FAIL:
-      return { ...state, ...action.payload };
+    case CommentActionTypes.SaveFail:
+      return {
+        ...state,
+        ...action.payload
+      };
 
     default:
       return { ...state };

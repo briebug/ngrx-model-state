@@ -9,11 +9,10 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/delay';
 
+import { CommentActionTypes, CommentActions } from '../actions/comment';
 import * as commentActions from '../actions/comment';
 import { Comment } from '../models/comment';
 import { CommentService } from '../services/comment';
-
-export type Action = commentActions.All;
 
 @Injectable()
 export class CommentEffects {
@@ -22,13 +21,13 @@ export class CommentEffects {
   }
 
   @Effect()
-  loadAll: Observable<Action> = this.actions.ofType(commentActions.LOAD_COMMENTS)
+  loadAll: Observable<CommentActions> = this.actions.ofType(CommentActionTypes.Load)
     .switchMap(() => this.commentSvc.loadAll())
     .map(comments => new commentActions.LoadCommentsSuccess(comments))
     .catch(err => of(new commentActions.LoadCommentsFail({ error: err.message })));
 
   @Effect()
-  saveComment: Observable<Action> = this.actions.ofType(commentActions.SAVE_COMMENT)
+  saveComment: Observable<CommentActions> = this.actions.ofType(CommentActionTypes.Save)
     .map((action: commentActions.SaveComments) => action.payload)
     .switchMap((comment: Comment) => this.commentSvc.save(comment))
     .map((comment: Comment) => new commentActions.SaveCommentsSuccess(comment))

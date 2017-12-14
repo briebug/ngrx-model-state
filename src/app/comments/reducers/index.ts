@@ -4,14 +4,14 @@ import * as fromPosts from '../../posts/reducers/post';
 import * as postSelectors from '../../posts/reducers';
 
 export interface State {
-  posts: fromComments.State;
+  posts: fromComments.CommentsState;
 }
 
 export const reducers: ActionReducerMap<State> = {
   posts: fromComments.commentReducer
 };
 
-export const selectCommentState = createFeatureSelector<fromComments.State>('comments');
+export const selectCommentState = createFeatureSelector<fromComments.CommentsState>('comments');
 
 export const {
   // select the array of comment ids
@@ -25,7 +25,7 @@ export const {
 
   // select the total count
   selectTotal: selectCommentTotal
-} = fromComments.adapter.getSelectors(selectCommentState);
+} = fromComments.commentAdapter.getSelectors(selectCommentState);
 
 export const selectByPostId = createSelector(
   selectAllComments,

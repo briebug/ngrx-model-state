@@ -15,8 +15,6 @@ export enum PostActionTypes {
 
 export class LoadPostsComments implements Action {
   readonly type = PostActionTypes.LoadPostsComments;
-
-  constructor() { }
 }
 
 export class LoadPosts implements Action {

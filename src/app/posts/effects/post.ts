@@ -10,11 +10,8 @@ import 'rxjs/add/operator/mergeMap';
 import 'rxjs/add/operator/catch';
 import 'rxjs/add/operator/delay';
 
-import { PostActionTypes,
-  LoadPosts, LoadPostsSuccess, LoadPostsFail,
-  SavePosts, SavePostsSuccess, SavePostsFail } from '../actions/post';
-import * as postActions from'../actions/post';
-
+import { PostActionTypes } from '../actions/post';
+import * as postActions from '../actions/post';
 import * as commentActions from '../../comments/actions/comment';
 import { Post } from '../models/post';
 import { PostService } from '../services/post';

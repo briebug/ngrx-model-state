@@ -18,6 +18,11 @@ export class PostsComponent implements OnInit {
 
   constructor(private store: Store<fromPosts.AppState>) {
     this.posts$ = this.store.select(postSelectors.selectAllPosts);
+
+    // hard coded to the first and only post in the array
+    // since we don't have a post page, there is no way to select a post,
+    // so we are just hard coding to the first post to simulate
+    this.store.dispatch(new postActions.Select(1));
   }
 
   ngOnInit() {

@@ -11,7 +11,6 @@ export class CommentService {
   constructor(private http: Http) { }
 
   loadAll(): Observable<Comment[]> {
-    console.log('CommentService.loadAll');
     return this.http.get('/api/comments')
       .map(res => res.json());
   }
